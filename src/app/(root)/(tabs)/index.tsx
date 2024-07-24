@@ -11,16 +11,21 @@ import GridView from "@/components/gridView";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 const menuItems = [
-  { title: "Al-Qur'an", icon: "quran" },
-  { title: "Do'a & Dzikir", icon: "pray" },
-  { title: "Jadwal Sholat", icon: "clock" },
-  { title: "Kiblat", icon: "kaaba" },
-  { title: "Tahlil & Yasin", icon: "book-reader" },
-  { title: "Maulid", icon: "book-open" },
-  { title: "Zakat", icon: "hand-holding-heart" },
-  { title: "Lain-Lain", icon: "microsoft" },
+  { title: "Al-Qur'an", icon: "quran", link: "/quran" },
+  { title: "Buku Santri", icon: "pray", link: "/buku-santri" },
+  { title: "Jadwal Sholat", icon: "clock", link: "/jadwal-sholat" },
+  { title: "Kiblat", icon: "kaaba", link: "/qiblat" },
+  { title: "Tahlil & Yasin", icon: "book-reader", link: "/tahlil-yasin" },
+  { title: "Maulid", icon: "book-open", link: "/maulid" },
+  {
+    title: "Kalkulator Zakat",
+    icon: "hand-holding-heart",
+    link: "/kalkulator-zakat",
+  },
+  { title: "Lain-Lain", icon: "microsoft", link: "/" },
 ];
 
 const HEADER_HEIGHT = 70;
@@ -57,7 +62,7 @@ const Home = () => {
           paddingTop: top,
         }}
         className={
-          "absolute top-0 left-0 right-0 bg-teal-900 justify-center items-center z-[1000] px-6"
+          "absolute top-0 left-0 right-0 bg-teal-500 dark:bg-teal-900 justify-center items-center z-[1000] px-6"
         }
       >
         <View className="bg-white w-full py-2 px-3 rounded-lg flex-row items-center justify-between">
@@ -115,17 +120,23 @@ const Home = () => {
             col={4}
             data={menuItems}
             renderItem={(item) => (
-              <View className="items-center aspect-square justify-center">
-                <View className="aspect-square w-20 rounded-xl items-center justify-center bg-teal-400/25 dark:bg-slate-800">
-                  <FontAwesome5 name={item.icon} size={28} color={colorIcon} />
+              <Link href={item.link}>
+                <View className="items-center aspect-square justify-center">
+                  <View className="aspect-square w-20 rounded-xl items-center justify-center bg-teal-400/25 dark:bg-slate-800">
+                    <FontAwesome5
+                      name={item.icon}
+                      size={28}
+                      color={colorIcon}
+                    />
+                  </View>
+                  <Text
+                    style={{ fontFamily: "Roboto_500Medium" }}
+                    className="mt-1 text-slate-900 dark:text-slate-300"
+                  >
+                    {item.title}
+                  </Text>
                 </View>
-                <Text
-                  style={{ fontFamily: "Roboto_500Medium" }}
-                  className="mt-1 text-slate-900 dark:text-slate-300"
-                >
-                  {item.title}
-                </Text>
-              </View>
+              </Link>
             )}
           />
         </View>
@@ -160,7 +171,7 @@ const Home = () => {
                   <Image
                     resizeMode="center"
                     className="aspect-square"
-                    source={require("../../assets/images/masjid.jpg")}
+                    source={require("@/assets/images/masjid.jpg")}
                   />
                 </View>
                 <View className="flex-1 pl-4">

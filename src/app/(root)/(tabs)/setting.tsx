@@ -76,7 +76,7 @@ const Settings = () => {
       >
         <Text
           style={{ fontFamily: "Roboto_500Medium" }}
-          className="text-3xl px-6"
+          className="text-3xl px-6 text-white"
         >
           Settings
         </Text>
